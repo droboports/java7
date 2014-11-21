@@ -99,25 +99,12 @@ wget --debug --verbose --cookies=on --keep-session-cookies --load-cookies=cookie
 
 }
 
-### JAVA7 CLIENT ###
-_build_java7client() {
+### JAVA7 ###
+_build_java7() {
 local VERSION="7u71"
 local BUILD="b14"
 local DATE="26_sep_2014"
-local FILE="ejre-${VERSION}-fcs-${BUILD}-linux-arm-vfp-sflt-client_headless-${DATE}.tar.gz"
-local URL="http://download.oracle.com/otn/java/ejre/${VERSION}-${BUILD}/${FILE}"
-local FOLDER="ejre1.7.0_71"
-
-_download_tgz_cookies "${FILE}" "${URL}" "${FOLDER}" cookies.txt
-mv "target/${FOLDER}" "${DEST}"
-}
-
-### JAVA7 SERVER ###
-_build_java7server() {
-local VERSION="7u71"
-local BUILD="b14"
-local DATE="26_sep_2014"
-local FILE="ejre-${VERSION}-fcs-${BUILD}-linux-arm-vfp-sflt-server_headless-${DATE}.tar.gz"
+local FILE="ejre-${VERSION}-fcs-${BUILD}-linux-arm-sflt-headless-${DATE}.tar.gz"
 local URL="http://download.oracle.com/otn/java/ejre/${VERSION}-${BUILD}/${FILE}"
 local FOLDER="ejre1.7.0_71"
 
@@ -127,7 +114,7 @@ mv "target/${FOLDER}" "${DEST}"
 
 ### BUILD ###
 _build() {
-  _build_java7server
+  _build_java7
   _package
 }
 
