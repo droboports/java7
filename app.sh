@@ -3,9 +3,11 @@
 # $3: folder
 # $4: cookies file
 _download_tgz_cookies() {
-  [[ ! -f "download/${1}" ]] && wget -O "download/${1}" --cookies=on --load-cookies="${4}" "${2}"
-  [[ -d "target/${3}" ]] && rm -v -fr "target/${3}"
-  [[ ! -d "target/${3}" ]] && tar -zxvf "download/${1}" -C target
+  [[ ! -d "download" ]]       && mkdir -p "download"
+  [[ ! -f "download/${1}" ]]  && wget -O "download/${1}" --cookies=on --load-cookies="${4}" "${2}"
+  [[ ! -d "target" ]]         && mkdir -p "target"
+  [[   -d "target/${3}" ]]    && rm -v -fr "target/${3}"
+  [[ ! -d "target/${3}" ]]    && tar -zxvf "download/${1}" -C target
   return 0
 }
 
@@ -30,12 +32,12 @@ wget --debug --verbose --cookies=on --keep-session-cookies --load-cookies=cookie
 
 ### JAVA7 ###
 _build_java7() {
-local VERSION="7u71"
-local BUILD="b14"
-local DATE="26_sep_2014"
+local VERSION="7u75"
+local BUILD="b13"
+local DATE="18_dec_2014"
 local FILE="ejre-${VERSION}-fcs-${BUILD}-linux-arm-sflt-headless-${DATE}.tar.gz"
 local URL="http://download.oracle.com/otn/java/ejre/${VERSION}-${BUILD}/${FILE}"
-local FOLDER="ejre1.7.0_71"
+local FOLDER="ejre1.7.0_75"
 
 _download_tgz_cookies "${FILE}" "${URL}" "${FOLDER}" cookies.txt
 mv "target/${FOLDER}" "${DEST}"
